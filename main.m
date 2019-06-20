@@ -40,12 +40,4 @@ Z_human = projectData(data_human_X_norm, U_human, K);
 
 fprintf('The projected data Z horse has a size of: ')
 fprintf('%d ', size(Z_horse));
-fprintf('\n\nPCA implementation Completed\n\nProgram paused. Press enter to continue.\n');
-pause;
-
-%%lets also have recovery fuction and test it
-
-X_horse_recovered=recoverX(Z_horse,U_horse,K);
-X_human_recovered=recoverX(Z_human,U_human,K);
-
-imshow(X_horse_recovered,300,300,3);
+fprintf('\n\nPCA implementation

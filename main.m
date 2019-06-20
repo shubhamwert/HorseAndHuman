@@ -38,6 +38,6 @@ fprintf('reducing dimensions',K );
 Z_horse = projectData(data_horse_X_norm, U_horse, K);
 Z_human = projectData(data_human_X_norm, U_human, K);
 
-fprintf('The projected data Z horse has a size of: ')
+fprintf('The projected data Z horse has a size of: ');
 fprintf('%d ', size(Z_horse));
-fprintf('\n\nPCA implementation
+fprintf('\n\nPCA implementation completed \n \n');

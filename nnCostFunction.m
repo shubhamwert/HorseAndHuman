@@ -13,21 +13,20 @@ Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
 
 %Feed Forward%
-
 a1=[ones(m,1),X];
 z2=(a1*Theta1');
+
+
 a2=[ones(size(z2),1),sigmoid(z2)];
+
 h_theta = sigmoid(a2*Theta2');
+
 a3=h_theta;
 
-y1=(y>=0) ;
-y2=(y<0) ;
-y_matrix=[y1 y2];
-J = (-sum(sum(y_matrix.*log(h_theta))) - sum(sum((1-y_matrix).*(log(1-h_theta)))))/m;
+J = (-sum(sum(y.*log(h_theta))) - sum(sum((1-y).*(log(1-h_theta)))))/m;
 
 %BackPropogation%
-
-s_delta3=(a3-y_matrix);
+s_delta3=(a3-y);
 s_delta2 = (s_delta3*Theta2).*[ones(size(z2,1),1) sigmoidGradient(z2)];     % has same dimensions as a2
 l_delta1=s_delta2(:,2:end)'* a1;
 l_delta2=s_delta3'*a2;

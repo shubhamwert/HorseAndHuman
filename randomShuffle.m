@@ -1,5 +1,5 @@
 function Z =randomShuffle(Z)
-fprintf('shuffling')
+fprintf('\n\nshuffling')
 for i=1:20
 
 fprintf('.')

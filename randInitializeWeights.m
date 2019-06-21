@@ -1,6 +1,6 @@
 function W = randInitializeWeights(L_in, L_out)
 
-W = zeros(L_out, 1 + L_in);
+W = zeros(L_in, 1 + L_out);
 
 epsilon_init = sqrt((L_out/L_out-L_in).^2);
 

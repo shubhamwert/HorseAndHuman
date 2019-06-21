@@ -1,4 +1,4 @@
-function X_rec = recoverData(Z, U, K)
+function X_rec = recoverX(Z, U, K)
 
 X_rec = zeros(size(Z, 1), size(U, 1));
 

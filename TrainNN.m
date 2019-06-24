@@ -5,11 +5,13 @@ function [Theta1,Theta2] = TrainNN(data)
 fprintf('\n\n');
 %%just like that to be sure of data being random
 data=randomShuffle(data);
+
+
 X_main=data(:,1:end-2);
 Y_main=data(:,end-1:end);
 
 %%sanity check
-X_main=normalizeFeatures(X_main);
+[X_main,mu,sigma]=normalizeFeatures(X_main);
 %%seprating training set
 
 X=X_main(1:850,:);
@@ -24,14 +26,14 @@ y_test=Y_main(950:end,:);
 
 %%NN parameters
 fprintf('\nInitializing NN params... \n')
-
-input_layer_size  = size(X,2); 
-hidden_layer_size = 150; 
 labels = 2;  
+input_layer_size  = size(X,2); 
+hidden_layer_size = floor(sqrt(input_layer_size*labels));   %masters 
+
                           
 
-initial_Theta1 = randInitializeWeights(input_layer_size,hidden_layer_size);
-initial_Theta2 = randInitializeWeights(hidden_layer_size,labels);
+initial_Theta1 = randInitializeWeights(input_layer_size,hidden_layer_size)/10;
+initial_Theta2 = randInitializeWeights(hidden_layer_size,labels)/10;
 
 size(initial_Theta1)
 initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
@@ -73,7 +75,7 @@ pause;
 fprintf("performing cross validation...\n");
 lambda_history=zeros(1000,1);
 fprintf('iterating lambda.')
-for i=1:1000
+for i=1:100
     fprintf('.')
     lambda_history(i)= nnCostFunction(nn_params,input_layer_size,hidden_layer_size,labels,x_cv, y_cv, i/10);
 end
@@ -83,19 +85,19 @@ fprintf('\n\n')
 error_test=nnCostFunction(nn_params,input_layer_size,hidden_layer_size,labels,x_test, y_test, lambda)*100/length(x_test)
 
 error_on_full_data=nnCostFunction(nn_params,input_layer_size,hidden_layer_size,labels,X_main, Y_main, lambda)*100/length(X_main)
-pred = predict(Theta1, Theta2, x_test);
 
 
-fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y_test)) * 100);
+pred = predict(Theta1, Theta2,x_test);
+
+
+fprintf('\n test Set Accuracy: %f\n', mean(double(pred == y_test)) * 100);
 
 fprintf('Program paused. Press enter to continue.\n');
-
+fprintf('if accuracy is 0 re-run the function as theta might not be correctly initialize \n');
 
 pause;
-
-fprintf('testing real time');
-D = dir('D:\mywork\ML\projects\HorseOrHuman\horse-or-human\humans\*.png');
-
+m=sum(sqrt((pred-y_test).^2))
+fprintf('error case through y == ',m)
 
 
 end

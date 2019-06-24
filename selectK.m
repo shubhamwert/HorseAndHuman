@@ -1,6 +1,16 @@
-function K = selectK(X,Z,initial_k)
+function K = selectK(S)
+    K=1;
+    total=0
+    SX=sum(sum(S));
+    fract=total/SX;
+    fprintf('Calculating K ..');
 
-    K=initial_k;
+    while fract<0.99
+        fprintf('.');
+        total=total+S(K,K);
+        fract=total/SX;
+        K++;
+    end
     
 
 

@@ -37,15 +37,31 @@ fprintf('\nRunnign PCA for humans\n');
 [U_human,S_human]=pca(data_human_X_norm);
 data_horse_X=[];
 data_human_X=[];
-K=2700/2;
+K_horse=selectK(S_horse);
+K_human=selectK(S_human);
+
+K=max([K_horse K_human]);
+
 fprintf('\n\nreducing dimensions for horse to %d\n',K );
 Z_horse = projectData(data_horse_X_norm, U_horse, K);
-fprintf('\nreducing dimensions for humans to %d\n\n')
+fprintf('\nreducing dimensions for humans to %d\n\n',K)
 Z_human = projectData(data_human_X_norm, U_human, K);
 fprintf('\n\nPCA implementation completed \n \n');
 
 fprintf('The projected data Z horse has a size of: ');
 fprintf('%d ', size(Z_horse));
+fprintf('\nsaving Human and horse data \n');
+
 csvwrite('PCA_Horse_values.csv',Z_horse);
 csvwrite('PCA_Human_values.csv',Z_human);
+
+fprintf('\nsaving U params ...\n')
+csvwrite('U_horse.csv',U_horse);
+csvwrite('U_human.csv',U_human);
+
+fprintf('\nsaving S params...\n')
+csvwrite('S_horse.csv',S_horse);
+csvwrite('S_human.csv',S_human);
+
+
 end

@@ -10,8 +10,5 @@ temp=temp(:)';
   X=[X;temp];
   fprintf('.');
 end
- imshow(reshape(X(3,:),300,300,3));
-
-
  
  end

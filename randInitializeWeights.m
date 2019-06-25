@@ -1,9 +1,8 @@
-function W = randInitializeWeights(L_in, L_out)
+function W = randInitializeWeights(fan_out, fan_in)
 
-W = zeros(L_in, 1 + L_out);
+W = zeros(fan_out, 1 + fan_in);
 
-epsilon_init = sqrt((L_out/L_out-L_in).^2);
+W = reshape(sin(1:numel(W)), size(W));
 
-W = rand(L_out, 1 + L_in) * 2 * epsilon_init - epsilon_init;
 
 end

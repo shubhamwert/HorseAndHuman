@@ -30,8 +30,8 @@ s_delta3=(a3-y);
 s_delta2 = (s_delta3*Theta2).*[ones(size(z2,1),1) sigmoidGradient(z2)];     % has same dimensions as a2
 l_delta1=s_delta2(:,2:end)'* a1;
 l_delta2=s_delta3'*a2;
-Theta1_grad = Theta1_grad + 0.000008*(1/m) * l_delta1;
-Theta2_grad = Theta2_grad + 0.000008*(1/m) * l_delta2;
+Theta1_grad = Theta1_grad +(1/m) * l_delta1;
+Theta2_grad = Theta2_grad +(1/m) * l_delta2;
 
 %regularization%
 Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + (lambda/m)*(Theta1(:,2:end));
